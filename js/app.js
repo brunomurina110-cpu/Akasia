@@ -28,6 +28,7 @@
       this.setupHeroCarousel();
       this.setupScrollPrompt();
       this.setupDropsPortal();
+      this.setupMobileNav();
       this.updateFloatingWhatsApp();
     }
 
@@ -55,7 +56,7 @@
       const availableCount = this.necklaces.filter(n => !n.isSold).length;
       const counterEl = document.getElementById('availableCounter');
       if (counterEl) {
-        counterEl.innerHTML = `<span class="dot"></span> ${availableCount} Piezas Disponibles`;
+        counterEl.innerHTML = `<span class="dot"></span> <span class="counter-label">${availableCount} Disponibles</span>`;
       }
 
       // Actualizar números en filtros (solo Todos y Disponibles)
@@ -332,6 +333,61 @@
 
       window.addEventListener('scroll', checkScroll, { passive: true });
       checkScroll();
+    }
+
+    setupMobileNav() {
+      const toggleBtn = document.getElementById('mobileMenuToggle');
+      const drawer = document.getElementById('mobileNavDrawer');
+      const backdrop = document.getElementById('mobileNavBackdrop');
+      const closeBtn = document.getElementById('mobileNavClose');
+      const drawerWaLink = document.getElementById('mobileDrawerWaLink');
+
+      if (drawerWaLink) {
+        drawerWaLink.href = this.generateWhatsAppLink();
+      }
+
+      if (!toggleBtn || !drawer || !backdrop) return;
+
+      const openDrawer = () => {
+        drawer.classList.add('is-open');
+        backdrop.classList.add('is-open');
+        toggleBtn.classList.add('is-active');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      };
+
+      const closeDrawer = () => {
+        drawer.classList.remove('is-open');
+        backdrop.classList.remove('is-open');
+        toggleBtn.classList.remove('is-active');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      };
+
+      toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = drawer.classList.contains('is-open');
+        if (isOpen) closeDrawer();
+        else openDrawer();
+      });
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closeDrawer);
+      }
+
+      backdrop.addEventListener('click', closeDrawer);
+
+      // Cerrar al hacer click en cualquier link del menú móvil
+      drawer.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', closeDrawer);
+      });
+
+      // Cerrar al presionar Escape
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
+          closeDrawer();
+        }
+      });
     }
 
     setupEventListeners() {

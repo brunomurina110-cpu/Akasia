@@ -60,6 +60,12 @@
   <!-- Site Navigation Header -->
   <header class="site-header" id="siteHeader">
     <div class="container nav-content">
+      <!-- Mobile Menu Toggle Button (Solo visible en móviles) -->
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
       <!-- Nav Left: Brand & Links grouped together -->
       <div class="nav-left">
         <!-- Brand Logo (solo texto sin logo pequeño a la izquierda) -->
@@ -67,8 +73,8 @@
           <span class="brand-title">AKASIA</span>
         </a>
 
-        <!-- Navigation Links -->
-        <nav aria-label="Navegación principal">
+        <!-- Navigation Links (Escritorio) -->
+        <nav aria-label="Navegación principal" class="desktop-nav">
           <ul class="nav-links">
             <li class="nav-item"><a href="drop-1.html">Drop 1</a></li>
             <li class="nav-item"><a href="drop-2.html">Drop 2</a></li>
@@ -81,7 +87,7 @@
       <div class="nav-actions">
         <!-- Live Available Pieces Counter -->
         <div class="badge-counter" id="availableCounter" title="Piezas únicas listas para compra">
-          <span class="dot"></span> 10 Disponibles
+          <span class="dot"></span> <span class="counter-label">10 Disponibles</span>
         </div>
 
         <!-- Instagram Profile Link -->
@@ -96,6 +102,68 @@
       </div>
     </div>
   </header>
+
+  <!-- Mobile Navigation Drawer Overlay & Panel -->
+  <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+  <aside class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Menú de navegación móvil">
+    <div class="mobile-nav-header">
+      <span class="mobile-nav-brand">AKASIA</span>
+      <button class="mobile-nav-close" id="mobileNavClose" aria-label="Cerrar menú">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="mobile-nav-body">
+      <ul class="mobile-nav-links">
+        <li>
+          <a href="index.html" class="mobile-nav-link active">
+            <span class="link-num">00</span>
+            <span class="link-text">Inicio</span>
+          </a>
+        </li>
+        <li>
+          <a href="drop-1.html" class="mobile-nav-link">
+            <span class="link-num">01</span>
+            <span class="link-text">Drop 1</span>
+            <span class="mobile-link-badge available">1 of 1</span>
+          </a>
+        </li>
+        <li>
+          <a href="drop-2.html" class="mobile-nav-link">
+            <span class="link-num">02</span>
+            <span class="link-text">Drop 2</span>
+            <span class="mobile-link-badge soon">Coming Soon</span>
+          </a>
+        </li>
+        <li>
+          <a href="clasicos.html" class="mobile-nav-link">
+            <span class="link-num">03</span>
+            <span class="link-text">Classics</span>
+            <span class="mobile-link-badge classic">Permanente</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="mobile-nav-footer">
+      <a href="#" class="btn-mobile-wa" id="mobileDrawerWaLink" target="_blank" rel="noopener noreferrer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.044c.101-.116.433-.506.549-.68.116-.174.231-.145.39-.087s1.011.477 1.184.564.289.13.332.203c.043.072.043.419-.101.824z" />
+        </svg>
+        <span>Atención por WhatsApp</span>
+      </a>
+      <div class="mobile-nav-social">
+        <a href="https://www.instagram.com/ak4sia_/" target="_blank" rel="noopener noreferrer" class="mobile-nav-ig">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+          </svg>
+          <span>@ak4sia_</span>
+        </a>
+      </div>
+    </div>
+  </aside>
 
   <!-- Hero Section: Carrusel Visual Editorial Puro de Punta a Punta -->
   <section class="hero-clean" id="hero">
