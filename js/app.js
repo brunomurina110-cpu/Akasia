@@ -56,7 +56,7 @@
       const availableCount = this.necklaces.filter(n => !n.isSold).length;
       const counterEl = document.getElementById('availableCounter');
       if (counterEl) {
-        counterEl.innerHTML = `<span class="dot"></span> <span class="counter-label">${availableCount} Disponibles</span>`;
+        counterEl.innerHTML = `<span class="dot"></span> <span class="counter-number">${availableCount}</span> <span class="counter-label">Disponibles</span>`;
       }
 
       // Actualizar números en filtros (solo Todos y Disponibles)
@@ -387,6 +387,11 @@
         if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
           closeDrawer();
         }
+      });
+
+      // Restaurar estado al navegar atrás/adelante en el historial del navegador
+      window.addEventListener('pageshow', () => {
+        closeDrawer();
       });
     }
 
