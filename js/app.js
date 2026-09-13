@@ -56,7 +56,19 @@
       const availableCount = this.necklaces.filter(n => !n.isSold).length;
       const counterEl = document.getElementById('availableCounter');
       if (counterEl) {
-        counterEl.innerHTML = `<span class="dot"></span> <span class="counter-number">${availableCount}</span> <span class="counter-label">Disponibles</span>`;
+        if (availableCount > 1) {
+          counterEl.classList.remove('is-sold');
+          counterEl.title = `${availableCount} piezas únicas disponibles listas para compra`;
+          counterEl.innerHTML = `<span class="dot"></span> <span class="counter-number">${availableCount}</span> <span class="counter-label">disponibles</span>`;
+        } else if (availableCount === 1) {
+          counterEl.classList.remove('is-sold');
+          counterEl.title = '1 pieza única disponible lista para compra';
+          counterEl.innerHTML = `<span class="dot"></span> <span class="counter-number">1</span> <span class="counter-label">disponible</span>`;
+        } else {
+          counterEl.classList.add('is-sold');
+          counterEl.title = 'Drops actualmente agotados';
+          counterEl.innerHTML = `<span class="dot"></span> <span class="counter-label">Drops agotados</span>`;
+        }
       }
 
       // Actualizar números en filtros (solo Todos y Disponibles)
