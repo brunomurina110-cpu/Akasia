@@ -1,0 +1,5 @@
+# Robots.txt para AKASIA (https://akasia.com.ar/)
+User-agent: *
+Allow: /
+
+Sitemap: https://akasia.com.ar/sitemap.xml
